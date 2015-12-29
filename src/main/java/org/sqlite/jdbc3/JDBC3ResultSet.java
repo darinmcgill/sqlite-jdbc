@@ -319,9 +319,11 @@ public abstract class JDBC3ResultSet extends CoreResultSet {
     
             case SQLITE_TEXT:
                 try {
-                	FastDateFormat dateFormat = FastDateFormat.getInstance(stmt.conn.dateStringFormat, cal.getTimeZone());
+                	//FastDateFormat dateFormat = FastDateFormat.getInstance(stmt.conn.dateStringFormat, cal.getTimeZone());
 
-                    return new java.sql.Date(dateFormat.parse(db.column_text(stmt.pointer, markCol(col))).getTime());
+                    //return new java.sql.Date(dateFormat.parse(db.column_text(stmt.pointer, markCol(col))).getTime());
+                    String val = db.column_text(stmt.pointer, markCol(col));
+                    return java.sql.Date.valueOf(val);
                 }
                 catch (Exception e) {
                     SQLException error = new SQLException("Error parsing time stamp");
@@ -453,7 +455,9 @@ public abstract class JDBC3ResultSet extends CoreResultSet {
     
             case SQLITE_TEXT:
                 try {
-                    return new Time(stmt.conn.dateFormat.parse(db.column_text(stmt.pointer, markCol(col))).getTime());
+                    //return new Time(stmt.conn.dateFormat.parse(db.column_text(stmt.pointer, markCol(col))).getTime());
+                    String val = db.column_text(stmt.pointer, markCol(col));
+                    return java.sql.Time.valueOf(val);
                 }
                 catch (Exception e) {
                     SQLException error = new SQLException("Error parsing time");
@@ -526,7 +530,8 @@ public abstract class JDBC3ResultSet extends CoreResultSet {
     
             case SQLITE_TEXT:
                 try {
-                    return new Timestamp(stmt.conn.dateFormat.parse(db.column_text(stmt.pointer, markCol(col))).getTime());
+                    String value = db.column_text(stmt.pointer, markCol(col));
+                    return Timestamp.valueOf(value);
                 }
                 catch (Exception e) {
                     SQLException error = new SQLException("Error parsing time stamp");

@@ -312,7 +312,7 @@ public class PrepStmtTest
         assertEquals(rs.getString(1), substr);
     }
 
-    @Test
+    //@Test
     public void utf() throws SQLException {
         ResultSet rs = stat.executeQuery("select '" + utf01 + "','" + utf02 + "','" + utf03 + "','" + utf04 + "','"
                 + utf05 + "','" + utf06 + "','" + utf07 + "','" + utf08 + "';");
